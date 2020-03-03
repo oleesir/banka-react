@@ -1,0 +1,149 @@
+:root {
+    --primary-color: #34495e;
+    --dark-color: #333333;
+    --light-color: #f4f4f4;
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+  }
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80) white no-repeat fixed;
+    background-size: cover;
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+header {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+.brand {
+    font-size: 30px;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.auth-content {
+    text-align: center; 
+    background: #fff;
+    padding: 50px;
+    width: 40%;
+    border-radius: 5px;
+} 
+
+.auth-content h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+
+.login-header, .signup-header {
+    margin: 10px 0px;
+}
+
+.from-content {
+    padding: 10px 20px;
+    width: 100%;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],input[type=tel] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    border-width:1px;
+    border-color:none;
+    margin: 10px 0px;
+    color: #333;
+    border-radius: 5px;
+}
+
+.btn {
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background: #f4511e;
+    border: none;
+    transition: background-color 0.5s, color 0.5s;
+    color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.7;
+}
+
+.btn-md {
+    padding: 10px 12px;
+    font-size: 16px;
+    width: 30%;
+    font-size: 15px;
+  }
+
+.login-bottom {
+    margin: 20px 0px;
+}
+
+.switch {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-container .footer p {
+    color: #fff;
+}
+
+.alert {
+    padding: 0.2rem;
+    margin:0;
+    opacity: 0.9;
+    background: var(--light-color);
+    color: #fff;
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.text-success {
+    color: var(--success-color);
+}
+
+
+.alert-danger {
+  background: var(--danger-color);
+  color: #fff;
+}
+
+
+.alert-success {
+  background: var(--success-color);
+  color: #fff;
+}
+
+.input-error{
+  color:#dc3545;
+  margin: 0;
+}
