@@ -1,5 +1,5 @@
-import React,{ useContext, useEffect } from 'react';
-import {useForm} from 'react-hook-form';
+import React,{ useContext, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import AuthContext from '../../context/auth/authContext';
@@ -11,10 +11,16 @@ import Alert from '../../components/layouts/Alerts';
 const Signup = (props) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
+  const [alertId] = useState();
 
   const{ register, handleSubmit, errors, formState: { isValid } } = useForm({ mode: 'onChange' });
-  const { signUp, error, clearErrors,isAuthenticated } = authContext;
-  const { setAlert, removeAlert, alerts} = alertContext;
+  const { signUp, error, clearErrors, isAuthenticated } = authContext;
+  const { setAlert, removeAlert, alerts } = alertContext;
+
+  const clearFormError = () => {
+    clearErrors();
+    removeAlert(alertId);
+  };
 
   const onChange = () => {
     clearErrors();
@@ -22,9 +28,6 @@ const Signup = (props) => {
   }
 
   const onSubmit = ({ firstName, lastName, email, password }) => {
-    if (error) {
-      setAlert(error, 'danger');
-    }
     signUp({
       firstName,
       lastName,
@@ -32,6 +35,12 @@ const Signup = (props) => {
       password
     });
   }
+
+
+  useEffect(() => {
+    clearFormError();
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if(isAuthenticated){
@@ -55,7 +64,8 @@ const Signup = (props) => {
             <Alert/>
             <div className='form-content'>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <input type='text' 
+                <input
+                  type='text' 
                   name='firstName'
                   placeholder='Firstname'
                   onChange={onChange}
@@ -114,7 +124,7 @@ const Signup = (props) => {
                   <input  type='submit' className='btn btn-md login-bottom' disabled={!isValid} value='Sign up'/>
                 <div className='switch'>
                     <p> Already have an account? </p>
-                      <Link to='/login'>Login</Link>
+                      <Link to='/login' onClick={clearFormError}>Login</Link>
                 </div>
               </form>
             </div>
