@@ -4,7 +4,7 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Signup from'./pages/auth/Signup';
 import Login from './pages/auth/Login';
 import Profile from './pages/profile/Profile';
-import AuthState from '../../client/src/context/auth/AuthState';
+import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 import setAuthToken from './utils/setAuthToken';
 
@@ -15,9 +15,9 @@ if(localStorage.token){
 
 const App = () => {
   return (
+    <Router>
     <AuthState>
       <AlertState>
-      <Router>
       <div className="App">
         <Switch>
           <Route exact path='/signup' component={Signup}/>
@@ -25,10 +25,9 @@ const App = () => {
           <Route exact path='/' component={Profile}/>
         </Switch>
         </div>
-      </Router>
       </AlertState> 
     </AuthState>
-    
+    </Router>
   );
 }
 

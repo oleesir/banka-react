@@ -1,4 +1,5 @@
 import React ,{ useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../auth/authContext';
 import authReducer from '../auth/authReducer';
@@ -6,9 +7,12 @@ import setAuthToken from '../../utils/setAuthToken';
 import {
 SIGNUP_SUCCESS,
 SIGNUP_FAIL,
+LOGIN_SUCCESS,
+LOGIN_FAIL,
 CLEAR_ERRORS,
 USER_LOADED,
-AUTH_ERROR
+AUTH_ERROR,
+
 } from '../types'
 
 const AuthState = props => {
@@ -20,6 +24,7 @@ const AuthState = props => {
     }
 
     const [state, dispatch] = useReducer(authReducer, initialState);
+    const history = useHistory();
 
     //Load User
     const loadUser = async()=>{
@@ -31,13 +36,14 @@ const AuthState = props => {
       try{
         const res = await axios.get('http://localhost:5000/api/v1/auth');
         dispatch({
-          type:USER_LOADED,
-          payload:res.data
+          type: USER_LOADED,
+          payload: res.data?.findUser
         })
-      }catch(err){
+      } catch(err) {
         dispatch({
-          type:AUTH_ERROR
+          type: AUTH_ERROR
         })
+        history.push("/login");
       }
     }
 
@@ -64,6 +70,31 @@ const AuthState = props => {
       }
     }
 
+    //login 
+    const login = async formData => {
+      const config = {
+        headers:{
+          'Content-Type':'application/json'
+        }
+      }
+
+      try{
+        const res = await axios.post('http://localhost:5000/api/v1/auth/signin', formData, config);
+
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data.data
+        })
+        loadUser();
+      }catch(err){
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: err.response.data.error
+        })
+        console.log(err);
+      }
+    }
+
   //clear errors
   const clearErrors = () => {
     dispatch({
@@ -79,6 +110,7 @@ const AuthState = props => {
           user: state.user,
           error: state.error,
           signUp,
+          login,
           clearErrors,
           loadUser
         }}
