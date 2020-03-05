@@ -9,10 +9,10 @@ SIGNUP_SUCCESS,
 SIGNUP_FAIL,
 LOGIN_SUCCESS,
 LOGIN_FAIL,
+LOGOUT,
 CLEAR_ERRORS,
 USER_LOADED,
-AUTH_ERROR,
-
+AUTH_ERROR
 } from '../types'
 
 const AuthState = props => {
@@ -95,6 +95,13 @@ const AuthState = props => {
       }
     }
 
+    //logout
+    const logout = () => {
+      dispatch({
+        type:LOGOUT
+      })
+    }
+
   //clear errors
   const clearErrors = () => {
     dispatch({
@@ -111,6 +118,7 @@ const AuthState = props => {
           error: state.error,
           signUp,
           login,
+          logout,
           clearErrors,
           loadUser
         }}
