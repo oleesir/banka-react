@@ -92,8 +92,8 @@ const Login = (props) => {
                
                   <input type='submit' className='btn btn-md login-bottom' disabled={!isValid} value='Login'/>
                     <div className="switch">
-                        <p> Need an account?</p>
-                         <Link to="/signup" onClick={clearFormError}>Sign up</Link>
+                        <p> Need an account?  <Link to="/signup" onClick={clearFormError}>Sign up</Link></p>
+                        
                     </div>
                 </form>
             </div>
