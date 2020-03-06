@@ -27,12 +27,15 @@ const Signup = (props) => {
     removeAlert(alerts[0]?.id);
   }
 
-  const onSubmit = ({ firstName, lastName, email, password }) => {
+  const onSubmit = ({ firstName, lastName, email, password, phoneNumber, address, city }) => {
     signUp({
       firstName,
       lastName,
       email,
-      password
+      password,
+      phoneNumber,
+      address,
+      city
     });
   }
 
@@ -120,11 +123,43 @@ const Signup = (props) => {
                   <div>
                   {errors.password && <small className="input-error">{errors.password.message}</small>}
                   </div>
+
+                  <input type='tel' 
+                  name='phoneNumber'
+                  placeholder='Phone number'
+                  onChange={onChange}
+                  ref={register({
+                    required: 'Phone number is required' 
+                    })}
+                  />
+                  <div>
+                  {errors.phoneNumber && <small className="input-error">{errors.phoneNumber.message}</small>}
+                  </div>
+
+                  <input
+                  type='text' 
+                  name='address'
+                  placeholder='Address'
+                  onChange={onChange}
+                  ref={register({
+                    required: 'Address is required',
+                  })}/>
+                {errors.address && <small className="input-error">{errors.address.message}</small>}
+
+                <input
+                  type='text' 
+                  name='city'
+                  placeholder='City'
+                  onChange={onChange}
+                  ref={register({
+                    required: 'City is required',
+                  })}/>
+                {errors.city && <small className="input-error">{errors.city.message}</small>}
                
                   <input  type='submit' className='btn btn-md login-bottom' disabled={!isValid} value='Sign up'/>
                 <div className='switch'>
-                    <p> Already have an account? </p>
-                      <Link to='/login' onClick={clearFormError}>Login</Link>
+                    <p> Already have an account?  <Link to='/login' onClick={clearFormError}>Login</Link></p>
+                      
                 </div>
               </form>
             </div>
