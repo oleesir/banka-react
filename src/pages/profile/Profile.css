@@ -1,0 +1,106 @@
+.card {
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+  border-radius: 5px;
+}
+
+.main-column-content {
+  margin: 20px 0px;
+  padding: 20px 80px;
+}
+
+.main-column-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 30px;
+}
+
+
+.user-details {
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+  width: 100%;
+}
+
+.pic {
+  width: 200px;
+  height: 200px;
+  background: purple;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  padding: 10px 30px;
+  height: 100%;
+}
+
+.details p {
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.account-details-item {
+  padding: 30px 20px;
+  font-size: 25px;
+  min-width: 300px;
+}
+
+.account-details-item-heading {
+  font-size: 15px;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.user-details .details span {
+  font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+  .user-details {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .details {
+    margin-top: 20px;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .account-details {
+    flex-direction: column;
+  }
+
+  .account-details .account-details-item {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1350px) {
+  .account-details .account-details-item {
+    padding: 20px;
+    min-width: 220px;
+  }
+}

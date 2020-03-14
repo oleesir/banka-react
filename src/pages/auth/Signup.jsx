@@ -28,7 +28,8 @@ const Signup = (props) => {
   }
 
   const onSubmit = ({ firstName, lastName, email, password, phoneNumber, address, city }) => {
-    signUp({
+
+   signUp({
       firstName,
       lastName,
       email,
@@ -37,6 +38,7 @@ const Signup = (props) => {
       address,
       city
     });
+
   }
 
 
@@ -50,8 +52,8 @@ const Signup = (props) => {
       props.history.push('/');
     }
 
-    if (error) {
-      setAlert(error, 'danger', 'form-error');
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
@@ -102,8 +104,8 @@ const Signup = (props) => {
                 ref={register({
                   required: 'Email is required',
                   pattern: {
-                    value:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: 'Please enter a valid email address'
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: "invalid email address"
                   } 
                 })}/>
                 {errors.email && <small className="input-error">{errors.email.message}</small>}

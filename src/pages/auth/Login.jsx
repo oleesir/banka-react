@@ -67,9 +67,9 @@ const Login = (props) => {
                       ref={register({
                       required: 'Email is required',
                       pattern: {
-                        value:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                        message: 'Please enter a valid email address'
-                      } 
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "Invalid email address"
+                      }
                     })}/>
                     {errors.email && <small className="input-error">{errors.email.message}</small>}
 
@@ -92,7 +92,7 @@ const Login = (props) => {
                
                   <input type='submit' className='btn btn-md login-bottom' disabled={!isValid} value='Login'/>
                     <div className="switch">
-                        <p> Need an account?  <Link to="/signup" onClick={clearFormError}>Sign up</Link></p>
+                        <p> Need an account?  <Link to="/signup" onClick={clearFormError} >Sign up</Link></p>
                         
                     </div>
                 </form>

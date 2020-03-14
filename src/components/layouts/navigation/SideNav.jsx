@@ -16,8 +16,7 @@ const SideNav = () => {
   const onLogout = () => {
     logout();
   }
-
-  return (
+return (
     <div className="side-column">
     <div className="close-icon">
         <i className="fas fa-times fa-2x close" title="close"></i>
@@ -32,11 +31,9 @@ const SideNav = () => {
       <Link to="/" className="active"><i className="fas fa-user"></i> &nbsp; &nbsp;Profile</Link>
       <Link to="/user_accounts" ><i className="fas fa-th-list"></i> &nbsp;&nbsp;Accounts</Link>
       <Link to="/transaction_history"><i className="fas fa-history"></i> &nbsp;&nbsp;Transactions</Link>
-      <Link to="./index.html" onClick={onLogout}><i className="fas fa-sign-out-alt"></i> &nbsp;&nbsp;Logout</Link>
+      <Link to="#!" onClick={onLogout}><i className="fas fa-sign-out-alt"></i> &nbsp;&nbsp;Logout</Link>
      </div>
   </div>
-      
-  
   )
 }
 
