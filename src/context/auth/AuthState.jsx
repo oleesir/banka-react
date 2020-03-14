@@ -16,8 +16,7 @@ AUTH_ERROR
 } from '../types'
 
 const AuthState = props => {
-    const initialState ={
-      token: localStorage.getItem('token'),
+    const initialState = {
       isAuthenticated: null,
       user: null,
       error: null
@@ -26,10 +25,9 @@ const AuthState = props => {
     const [state, dispatch] = useReducer(authReducer, initialState);
     const history = useHistory();
 
-    //Load User
+    // Load User
     const loadUser = async()=>{
-
-      if(localStorage.token){
+      if (localStorage.token){
         setAuthToken(localStorage.token);
       }
 
@@ -37,7 +35,7 @@ const AuthState = props => {
         const res = await axios.get('http://localhost:5000/api/v1/auth');
         dispatch({
           type: USER_LOADED,
-          payload: res.data?.findUser
+          payload: res.data.data
         })
       } catch(err) {
         dispatch({
@@ -56,12 +54,14 @@ const AuthState = props => {
       }
 
       try{
-        const res = await axios.post('http://localhost:5000/api/v1/auth/signup',formData,config);
+        const res = await axios.post('http://localhost:5000/api/v1/auth/signup', formData, config);
+
+        localStorage.setItem('token', res.data.data.token);
+
         dispatch({
           type: SIGNUP_SUCCESS,
           payload: res.data.data
         });
-          loadUser();
       } catch(err) {
         dispatch({
           type: SIGNUP_FAIL,
@@ -81,22 +81,24 @@ const AuthState = props => {
       try{
         const res = await axios.post('http://localhost:5000/api/v1/auth/signin', formData, config);
 
+        localStorage.setItem('token', res.data.data.token);
+
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.data.data
-        })
-        loadUser();
-      }catch(err){
+        });
+      } catch(err){
         dispatch({
           type: LOGIN_FAIL,
           payload: err.response.data.error
         })
-        console.log(err);
       }
     }
 
-    //logout
+    // logout
     const logout = () => {
+      localStorage.removeItem('token');
+
       dispatch({
         type:LOGOUT
       })
@@ -112,7 +114,6 @@ const AuthState = props => {
   return (
       <AuthContext.Provider
         value={{
-          token: state.token,
           isAuthenticated: state.isAuthenticated,
           user: state.user,
           error: state.error,

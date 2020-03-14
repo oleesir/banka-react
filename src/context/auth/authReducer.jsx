@@ -7,35 +7,28 @@ import {
     CLEAR_ERRORS,
     USER_LOADED,
     AUTH_ERROR
-} from '../types'
+} from '../types';
 
-export default (state, action)=>{
+export default (state, action) => {
   const { type } = action;
 
   switch(type) {
     case USER_LOADED:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload
-      }
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.token)
       return {
-          ...state,
-          ...action.payload,
-          isAuthenticated: true,
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
       };
     case SIGNUP_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-      localStorage.removeItem('token');
-      return{
+      return {
           ...state,
-          data: null,
           user: null,
+          isAuthenticated: false,
           error: action.payload
       }
     case CLEAR_ERRORS:

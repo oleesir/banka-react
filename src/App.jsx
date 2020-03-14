@@ -21,7 +21,7 @@ const App = () => {
     <AuthState>
       <AlertState>
       <div className="App">
-        <SideNav />
+        <SideNav/>
         <Switch>
           <Route exact path='/signup' component={Signup}/>
           <Route exact path='/login' component={Login}/>
