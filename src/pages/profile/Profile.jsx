@@ -1,25 +1,26 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import AccountContext from '../../context/account/accountContext';
 import './Profile.css';
 
 const Profile = () => {
   const authContext = useContext(AuthContext);
+  const accountContext = useContext(AccountContext);
 
   const{ user } = authContext;
+  const{ accounts } = accountContext;
 
   const [selectedAccount, setSelectedAccount] = useState(user.accounts[0]);
-
-  //  const {firstName, lastName, email, phoneNumber, address, city} = user;
 
   const handleAccountSelect = (event) => {
     
     const selectedAccountNumber = event.target.value;
 
-    const accountToSelect = user.accounts.find((account) => selectedAccountNumber === account.accountNumber);
+    const accountToSelect = accounts.find((account) => +selectedAccountNumber === +account.accountNumber);
 
     setSelectedAccount(accountToSelect); 
   };
-
+  console.log('hello man',accounts);
 
   return (
     <div className="wrapper">
@@ -49,20 +50,23 @@ const Profile = () => {
             </ul>
           </div>
           <div>
+            
             {user.accounts.length > 1 && (
               <select value={selectedAccount.accountNumber} onChange={handleAccountSelect}>
                 <option disabled>Select an account</option>
                 {user.accounts.map((account) => (
                   <option key={account.accountNumber} value={account.accountNumber}>{`${account.accountNumber} (${account.type})`}</option>
                 ))}
+                
               </select>
+              
             )}
           </div>
           {selectedAccount && (
             <div className="account-details">
             <div className="card account-details-item acct-bal">
               <p className="account-details-item-heading">Account Balance</p>
-                <p className="amt">N {selectedAccount.balance}</p>
+              <p className="amt">N {selectedAccount.balance}</p>
             </div>
 
             <div className="card account-details-item acct-bal">

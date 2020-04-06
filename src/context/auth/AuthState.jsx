@@ -12,12 +12,15 @@ LOGIN_FAIL,
 LOGOUT,
 CLEAR_ERRORS,
 USER_LOADED,
-AUTH_ERROR
+AUTH_ERROR,
+AUTHENTICATING,
+UPDATE_USER,
 } from '../types'
 
 const AuthState = props => {
     const initialState = {
-      isAuthenticated: null,
+      isAuthenticated: false,
+      isAuthenticating: true,
       user: null,
       error: null
     }
@@ -25,8 +28,14 @@ const AuthState = props => {
     const [state, dispatch] = useReducer(authReducer, initialState);
     const history = useHistory();
 
+    console.log(state)
+
     // Load User
     const loadUser = async()=>{
+      dispatch({
+        type: AUTHENTICATING,
+      });
+
       if (localStorage.token){
         setAuthToken(localStorage.token);
       }
@@ -53,6 +62,10 @@ const AuthState = props => {
         }
       }
 
+      dispatch({
+        type: AUTHENTICATING,
+      });
+
       try{
         const res = await axios.post('http://localhost:5000/api/v1/auth/signup', formData, config);
 
@@ -78,6 +91,10 @@ const AuthState = props => {
         }
       }
 
+      dispatch({
+        type: AUTHENTICATING,
+      });
+
       try{
         const res = await axios.post('http://localhost:5000/api/v1/auth/signin', formData, config);
 
@@ -92,6 +109,7 @@ const AuthState = props => {
           type: LOGIN_FAIL,
           payload: err.response.data.error
         })
+        console.log('hello world',err.response.data.error)
       }
     }
 
@@ -111,17 +129,26 @@ const AuthState = props => {
     })
   }
 
+  const updateUser = (updatedUser) => {
+    dispatch({
+      type: UPDATE_USER,
+      payload: updatedUser
+    })
+  }
+
   return (
       <AuthContext.Provider
         value={{
           isAuthenticated: state.isAuthenticated,
+          isAuthenticating: state.isAuthenticating,
           user: state.user,
           error: state.error,
           signUp,
           login,
           logout,
           clearErrors,
-          loadUser
+          loadUser,
+          updateUser
         }}
       >
         {props.children}

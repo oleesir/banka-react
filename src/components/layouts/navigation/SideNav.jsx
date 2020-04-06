@@ -29,7 +29,7 @@ return (
     </div>
     <div className="side-column-links">
       <Link to="/" className="active"><i className="fas fa-user"></i> &nbsp; &nbsp;Profile</Link>
-      <Link to="/user_accounts" ><i className="fas fa-th-list"></i> &nbsp;&nbsp;Accounts</Link>
+      <Link to="/accounts"><i className="fas fa-th-list"></i> &nbsp;&nbsp;Accounts</Link>
       <Link to="/transaction_history"><i className="fas fa-history"></i> &nbsp;&nbsp;Transactions</Link>
       <Link to="#!" onClick={onLogout}><i className="fas fa-sign-out-alt"></i> &nbsp;&nbsp;Logout</Link>
      </div>
