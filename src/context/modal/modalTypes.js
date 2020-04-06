@@ -1,0 +1,1 @@
+export const CREATE_ACCOUNT_MODAL = 'CREATE_ACCOUNT';
